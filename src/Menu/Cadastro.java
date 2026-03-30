@@ -6,17 +6,32 @@ public class Cadastro {
         ArrayList<Animal> dados = new ArrayList<>();
 
    public void criarAnimal(Animal animal) throws ExececaoErrorCriacao {
-      if(animal.getNome() == null || animal.getNome().trim().isEmpty()) {
+
+       if (animal == null){
+           throw new ExececaoErrorCriacao("animal inexistente");
+       }
+
+       if(animal.getNome() == null || animal.getNome().trim().isEmpty()) {
           throw new ExececaoErrorCriacao("Nome vazio ou invalido");
       }
        if (!animal.getNome().matches("^[a-zA-ZÀ-ÿ\\s]+$")) {
-           throw new ExececaoErrorCriacao("Nome/Sobrenome contém caracteres especias");
+           throw new ExececaoErrorCriacao("Nome contém caracteres especias");
+       }
+       if(animal.getSobrenome() == null || animal.getSobrenome().trim().isEmpty()) {
+           throw new ExececaoErrorCriacao("Sobrenome vazio ou invalido");
+       }
+       if (!animal.getSobrenome().matches("^[a-zA-ZÀ-ÿ\\s]+$")) {
+           throw new ExececaoErrorCriacao("Sobrenome contém caracteres especias");
        }
        if (animal.getPeso() > 60 || animal.getPeso() < 0.5 ) {
            throw new ExececaoErrorCriacao("Pet com Peso Obeso+ ou Ta morto");
        }
-       if (animal.getIdade() > 20){
+       if (animal.getIdade() > 20 ) {
            throw new ExececaoErrorCriacao("É uma Mumia é?");
+       }
+
+       if(animal.getRaca() == null || animal.getRaca().trim().isEmpty() || !animal.getRaca().matches("^[a-zA-ZÀ-ÿ\\s]+$")){
+           throw new ExececaoErrorCriacao("Raça Vazia ou Invalida");
        }
        dados.add(animal);
         }
