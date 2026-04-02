@@ -1,7 +1,7 @@
 package Menu;
 
 public enum SexoAnimal {
-    Masculino,
-    Feminino,
+    MASCULINO,
+    FEMININO,
     NAO_INFORMADO
 }

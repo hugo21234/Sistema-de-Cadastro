@@ -1,11 +1,18 @@
 package Menu;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
+
 
 public class Cadastro {
     protected static ArrayList<Animal> dados = new ArrayList<>();
+    Path diretorio = Paths.get("C:\\Users\\Humberto Figueiredo\\IdeaProjects\\SistemaDeCadastro\\src\\Menu\\petsCadastrados");
 
-    public void criarAnimal(Animal animal) throws ExececaoErrorCriacao {
+    public void criarAnimal(Animal animal) throws ExececaoErrorCriacao, IOException {
 
         if (animal == null) {
             throw new ExececaoErrorCriacao("animal inexistente");
@@ -34,10 +41,27 @@ public class Cadastro {
         if (animal.getRaca() == null || animal.getRaca().trim().isEmpty() || !animal.getRaca().matches("^[a-zA-ZÀ-ÿ\\s]+$")) {
             throw new ExececaoErrorCriacao("Raça Vazia ou Invalida");
         }
-        if (animal.getIdade() < 1){
-            double idadeConvertida = animal.idade / 12;
-        }
+
         dados.add(animal);
+
+        String titulo = java.time.LocalDate.now() +"_"+animal.getNome().toUpperCase() + "_" + animal.getSobrenome().toUpperCase();
+
+       try( FileWriter FileWriter = new FileWriter( diretorio+ "\\" + titulo+ ".txt")) {
+
+           FileWriter.write("ID: " + animal.getId() + "\n" +
+                   " Nome: " + animal.getNome() + "\n"
+                   + " Sobrenome: " + animal.getSobrenome() + "\n"
+                   + " Sexo: " + animal.getSexo() + "\n" +
+                   " Idade: " + animal.getIdade() + "\n" +
+                   " Peso: " + animal.getPeso() + " \n"
+                   + " Raça: " + animal.getRaca() + "\n"
+                   + "Tipo: " + animal.getTipo() + "\n"
+                   + " Endereço: " + animal.getEndereco());
+       }
+      catch (Exception e){
+           System.out.println("Erro ao criar arquivo: " + e.getMessage());
+      }
+
         System.out.println(getAll());
     }
 

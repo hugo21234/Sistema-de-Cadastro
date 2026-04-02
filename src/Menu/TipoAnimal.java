@@ -1,6 +1,6 @@
 package Menu;
 
 public enum TipoAnimal {
-    cachorro,
-    gato
+    CACHORRO,
+    GATO
 }

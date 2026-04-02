@@ -1,0 +1,9 @@
+ID: 8236.0
+ Nome: alfredo
+ Sobrenome: Não informado
+ Sexo: FEMININO
+ Idade: 1.0
+ Peso: 7.0 
+ Raça: poodle
+Tipo: CACHORRO
+ Endereço: mauricio melo 775 rj

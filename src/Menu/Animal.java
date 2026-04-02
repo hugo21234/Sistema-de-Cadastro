@@ -19,7 +19,7 @@ public class Animal {
         this.nome = nome;
         this.sobrenome = aplicarpadrao(sobrenome);
         this.sexo = aplicarpadraoSexo(sexo);
-        this.idade = idade;
+        this.idade = normalizarIdade(idade);
         this.raca = raca;
         this.peso = peso;
         this.tipo = tipo;
@@ -60,6 +60,12 @@ public class Animal {
             return NAO_INFORMADO;
         }
         return valor;
+    }
+    private double normalizarIdade(double idade) {
+        if (idade < 1) {
+            return idade / 12;
+        }
+        return idade;
     }
 
     public double getId() {

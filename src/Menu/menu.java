@@ -9,7 +9,7 @@ import java.math.MathContext;
 
 public class menu {
 
-    static void main(String[] args) throws Exception {
+   public static void main(String[] args) throws Exception {
         List<String> perguntas = new ArrayList<>();
         Cadastro cadastro = new Cadastro();
         Scanner scanner = new Scanner(System.in);
@@ -62,11 +62,11 @@ public class menu {
                         // Pergunta 2: Tipo do pet
                         System.out.println(perguntas.get(1));
                         String tipo = scanner.nextLine();
-                        TipoAnimal tipoAnimal = TipoAnimal.valueOf(tipo);
+                        TipoAnimal tipoAnimal = TipoAnimal.valueOf(String.valueOf(tipo.trim().toUpperCase()));
                         // Pergunta 3: Sexo do animal
                         System.out.println(perguntas.get(2));
                         String sexoInput = scanner.nextLine();
-                        SexoAnimal sexoAnimal = SexoAnimal.valueOf(sexoInput);
+                        SexoAnimal sexoAnimal = SexoAnimal.valueOf(String.valueOf(sexoInput.trim().toUpperCase()));
 
                         // Pergunta 4: Endereço e bairro
                         System.out.println(perguntas.get(3));
@@ -96,10 +96,11 @@ public class menu {
                         String[] nomeCompleto = nome.split(" ");
                         String nomeOnly = nomeCompleto.length > 0 ? nomeCompleto[0] : "";
                         String sobrenome = nomeCompleto.length > 1 ? nomeCompleto[1] : "";
-                        Math math = null;
-                        double id = math.random() * 1000;
-                        double idFormatado = math.round(id);
-                        Animal animal = new Animal(idFormatado, nome, sobrenome, sexoAnimal, tipoAnimal, idade, peso, raca, endereco);
+
+                       int id = (int)(Math.random() * 9999) + 1;
+
+
+                        Animal animal = new Animal(id, nome, sobrenome, sexoAnimal, tipoAnimal, idade, peso, raca, endereco);
                         try {
                             cadastro.criarAnimal(animal);
                             System.out.println("Animal criado com sucesso!"+ cadastro.getAll());
