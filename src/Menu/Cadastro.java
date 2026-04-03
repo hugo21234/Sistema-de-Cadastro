@@ -80,22 +80,98 @@ public class Cadastro {
     public void alteraDados() {
     }
 
-    public void buscarAnimal(String nome) {
+    public void buscarAnimal(String criterio, String valor ) {
         boolean encontrado = false;
-        for (Animal n : dados) {
-            if (n.getNome().equals(nome)) {
-                encontrado = true;
-                System.out.print("Animal" + " " + n.getNome() + " " + "Encontrado");
+        if (criterio.equalsIgnoreCase("nome")) {
+            for (Animal n : dados) {
+                if (n.getNome().equals(valor)) {
+                    encontrado = true;
+                    System.out.print("Animal" + " " + n.getNome() + " " + "Encontrado");
+
+                }
+            }
+        } else if (criterio.equalsIgnoreCase("sobrenome")) {
+            for (Animal n : dados) {
+                if (n.getSobrenome().equals(valor)) {
+                    encontrado = true;
+                    System.out.print("Animal" + " " + n.getSobrenome() + " " + "Encontrado");
+
+                }
 
             }
+        } else if (criterio.equalsIgnoreCase("raca")) {
+            for (Animal n : dados) {
+                if (n.getRaca().equals(valor)) {
+                    encontrado = true;
+                    System.out.print("Animal" + " " + n.getRaca() + " " + "Encontrado");
+
+                }
+
+            }
+        } else if (criterio.equalsIgnoreCase("tipo")) {
+            for (Animal n : dados) {
+                if (n.getTipo().toString().equalsIgnoreCase(valor)) {
+                    encontrado = true;
+                    System.out.print("Animal" + " " + n.getTipo() + " " + "Encontrado");
+
+                }
+
+            }
+        } else if (criterio.equalsIgnoreCase("sexo")) {
+            for (Animal n : dados) {
+                if (n.getSexo().toString().equalsIgnoreCase(valor)) {
+                    encontrado = true;
+                    System.out.print("Animal" + " " + n.getSexo() + " " + "Encontrado");
+
+                }
+
+            }
+
+        } else if (criterio.equalsIgnoreCase("idade")) {
+            for (Animal n : dados) {
+                if (Double.toString(n.getIdade()).equals(valor)) {
+                    encontrado = true;
+                    System.out.print("Animal" + " " + n.getIdade() + " " + "Encontrado");
+
+                }
+
+            }
+        } else if (criterio.equalsIgnoreCase("peso")) {
+            for (Animal n : dados) {
+                if (Double.toString(n.getPeso()).equals(valor)) {
+                    encontrado = true;
+                    System.out.print("Animal" + " " + n.getPeso() + " " + "Encontrado");
+
+                }
+
+            }
+        } else if (criterio.equalsIgnoreCase("endereco")) {
+            for (Animal n : dados) {
+                if (n.getEndereco().equalsIgnoreCase(valor)) {
+                    encontrado = true;
+                    System.out.print("Animal" + " " + n.getEndereco() + " " + "Encontrado");
+
+                }
+
+            }
+
+        } else if (criterio.equalsIgnoreCase("id")) {
+            for (Animal n : dados) {
+                if (Double.toString(n.getId()).equals(valor)) {
+                    encontrado = true;
+                    System.out.print("Animal" + " " + n.getId() + " " + "Encontrado");
+
+                }
+
+            }
+        } else {
+            System.out.println("Criterio Invalido");
         }
         if (!encontrado) {
-            System.out.print("Animal não encontrado");
+            System.out.println("Animal Não Encontrado");
         }
-
     }
-
-    public String getAll() {
+        public String getAll() {
         if (dados.isEmpty()) {
             String s = "dados vazios";
         }

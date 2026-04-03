@@ -109,8 +109,8 @@ public class menu {
                         }
                         break;
                     case "2":
-                        System.out.println("Opção 2 selecionada: A Animal");
-                        cadastro.getAll();
+                        System.out.println("Opção 2 selecionada: ");
+
                         System.out.println("Qual deseja alterar?");
                         String escolhido = scanner.nextLine();
 
@@ -120,8 +120,44 @@ public class menu {
                         System.out.println("Opção 3 selecionada: Deletar Animal");
                         // Aqui você pode adicionar a lógica para buscar um animal
                         break;
-                    default:
-                        System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
+                    case "4":
+                        System.out.println("1 criterio ou 2 criterio");
+                        String esc1 = scanner.nextLine();
+                        if (esc1.equals("1")) {
+                            System.out.println("Qual criterio deseja listar?");
+                            String criterio = scanner.nextLine();
+                            if (criterio.equalsIgnoreCase("nome")) {
+                                System.out.println("Digite o nome do pet que deseja buscar:");
+                                String valor = scanner.nextLine();
+                                cadastro.buscarAnimal("nome", valor);
+                            } else if (criterio.equalsIgnoreCase("sobrenome")) {
+                                System.out.println("Digite o sobrenome do pet que deseja buscar:");
+                                String valor = scanner.nextLine();
+                                cadastro.buscarAnimal("sobrenome", valor);
+                            } else if (criterio.equalsIgnoreCase("sexo")) {
+                                System.out.println("Digite o sexo do pet que deseja buscar:");
+                                String valor = scanner.nextLine();
+                                cadastro.buscarAnimal("sexo", valor);
+                            } else if (criterio.equalsIgnoreCase("tipo")) {
+                                System.out.println("Digite o tipo do pet que deseja buscar:");
+                                String valor = scanner.nextLine();
+                                cadastro.buscarAnimal("tipo", valor);
+                            } else if (criterio.equalsIgnoreCase("idade")) {
+                                System.out.println("Digite a idade do pet que deseja buscar:");
+                                String valor = scanner.nextLine();
+                                cadastro.buscarAnimal("idade", valor);
+                            } else if (criterio.equalsIgnoreCase("peso")) {
+                                System.out.println("Digite o peso do pet que deseja buscar:");
+                                String valor = scanner.nextLine();
+                                cadastro.buscarAnimal("peso", valor);
+                            } else if (criterio.equalsIgnoreCase("raca")) {
+                                System.out.println("Digite a raça do pet que deseja buscar:");
+                                String valor = scanner.nextLine();
+                                cadastro.buscarAnimal("raca", valor);
+
+                            }
+
+                        }
                 }
             }
         }
