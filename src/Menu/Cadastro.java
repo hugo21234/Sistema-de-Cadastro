@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -44,25 +43,22 @@ public class Cadastro {
 
         dados.add(animal);
 
-        String titulo = java.time.LocalDate.now() +"_"+animal.getNome().toUpperCase() + "_" + animal.getSobrenome().toUpperCase();
+        String titulo = java.time.LocalDate.now() + "_" + animal.getNome().toUpperCase() + "_" + animal.getSobrenome().toUpperCase();
 
-       try( FileWriter FileWriter = new FileWriter( diretorio+ "\\" + titulo+ ".txt")) {
+        try (FileWriter FileWriter = new FileWriter(diretorio + "\\" + titulo + ".txt")) {
 
-           FileWriter.write("ID: " + animal.getId() + "\n" +
-                   " Nome: " + animal.getNome() + "\n"
-                   + " Sobrenome: " + animal.getSobrenome() + "\n"
-                   + " Sexo: " + animal.getSexo() + "\n" +
-                   " Idade: " + animal.getIdade() + "\n" +
-                   " Peso: " + animal.getPeso() + " \n"
-                   + " Raça: " + animal.getRaca() + "\n"
-                   + "Tipo: " + animal.getTipo() + "\n"
-                   + " Endereço: " + animal.getEndereco());
-       }
-      catch (Exception e){
-           System.out.println("Erro ao criar arquivo: " + e.getMessage());
-      }
-
-        System.out.println(getAll());
+            FileWriter.write("ID: " + animal.getId() + "\n" +
+                    " Nome: " + animal.getNome() + "\n"
+                    + " Sobrenome: " + animal.getSobrenome() + "\n"
+                    + " Sexo: " + animal.getSexo() + "\n" +
+                    " Idade: " + animal.getIdade() + "\n" +
+                    " Peso: " + animal.getPeso() + " \n"
+                    + " Raça: " + animal.getRaca() + "\n"
+                    + "Tipo: " + animal.getTipo() + "\n"
+                    + " Endereço: " + animal.getEndereco());
+        } catch (Exception e) {
+            System.out.println("Erro ao criar arquivo: " + e.getMessage());
+        }
     }
 
     public void deletarAnimal(String nome) {
@@ -75,16 +71,28 @@ public class Cadastro {
         }
     }
 
-    ;
-
     public void alteraDados() {
     }
 
-    public void buscarAnimal(String criterio, String valor ) {
+    public void buscarAnimal(String criterio, String valor, String petTipo) {
         boolean encontrado = false;
+
+        if (criterio == null || valor == null || petTipo == null || criterio.trim().isEmpty() || valor.trim().isEmpty() || petTipo.trim().isEmpty()) {
+            System.out.println("Criterio ou valor inválido");
+            return;
+        }
+
+        TipoAnimal tipoFiltro;
+        try {
+            tipoFiltro = TipoAnimal.valueOf(petTipo.trim().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Tipo de pet inválido");
+            return;
+        }
+
         if (criterio.equalsIgnoreCase("nome")) {
             for (Animal n : dados) {
-                if (n.getNome().equals(valor)) {
+                if (n.getNome().toUpperCase().contains(valor.toUpperCase()) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
                     System.out.print("Animal" + " " + n.getNome() + " " + "Encontrado");
 
@@ -92,7 +100,7 @@ public class Cadastro {
             }
         } else if (criterio.equalsIgnoreCase("sobrenome")) {
             for (Animal n : dados) {
-                if (n.getSobrenome().equals(valor)) {
+                if (n.getSobrenome().toUpperCase().contains(valor.toUpperCase()) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
                     System.out.print("Animal" + " " + n.getSobrenome() + " " + "Encontrado");
 
@@ -101,7 +109,7 @@ public class Cadastro {
             }
         } else if (criterio.equalsIgnoreCase("raca")) {
             for (Animal n : dados) {
-                if (n.getRaca().equals(valor)) {
+                if (n.getRaca().equals(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
                     System.out.print("Animal" + " " + n.getRaca() + " " + "Encontrado");
 
@@ -110,7 +118,7 @@ public class Cadastro {
             }
         } else if (criterio.equalsIgnoreCase("tipo")) {
             for (Animal n : dados) {
-                if (n.getTipo().toString().equalsIgnoreCase(valor)) {
+                if (n.getTipo().toString().equalsIgnoreCase(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
                     System.out.print("Animal" + " " + n.getTipo() + " " + "Encontrado");
 
@@ -119,7 +127,7 @@ public class Cadastro {
             }
         } else if (criterio.equalsIgnoreCase("sexo")) {
             for (Animal n : dados) {
-                if (n.getSexo().toString().equalsIgnoreCase(valor)) {
+                if (n.getSexo().toString().equalsIgnoreCase(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
                     System.out.print("Animal" + " " + n.getSexo() + " " + "Encontrado");
 
@@ -129,7 +137,7 @@ public class Cadastro {
 
         } else if (criterio.equalsIgnoreCase("idade")) {
             for (Animal n : dados) {
-                if (Double.toString(n.getIdade()).equals(valor)) {
+                if (Double.toString(n.getIdade()).equals(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
                     System.out.print("Animal" + " " + n.getIdade() + " " + "Encontrado");
 
@@ -138,7 +146,7 @@ public class Cadastro {
             }
         } else if (criterio.equalsIgnoreCase("peso")) {
             for (Animal n : dados) {
-                if (Double.toString(n.getPeso()).equals(valor)) {
+                if (Double.toString(n.getPeso()).equals(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
                     System.out.print("Animal" + " " + n.getPeso() + " " + "Encontrado");
 
@@ -147,7 +155,7 @@ public class Cadastro {
             }
         } else if (criterio.equalsIgnoreCase("endereco")) {
             for (Animal n : dados) {
-                if (n.getEndereco().equalsIgnoreCase(valor)) {
+                if (n.getEndereco().equalsIgnoreCase(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
                     System.out.print("Animal" + " " + n.getEndereco() + " " + "Encontrado");
 
@@ -157,7 +165,7 @@ public class Cadastro {
 
         } else if (criterio.equalsIgnoreCase("id")) {
             for (Animal n : dados) {
-                if (Double.toString(n.getId()).equals(valor)) {
+                if (Double.toString(n.getId()).equals(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
                     System.out.print("Animal" + " " + n.getId() + " " + "Encontrado");
 
@@ -171,15 +179,73 @@ public class Cadastro {
             System.out.println("Animal Não Encontrado");
         }
     }
-        public String getAll() {
-        if (dados.isEmpty()) {
-            String s = "dados vazios";
-        }
-        for (Animal n : dados) {
 
-            System.out.println("ID: " + n.getId() + " Nome: " + n.getNome() + " Sobrenome: " + n.getSobrenome() + " Sexo: " + n.getSexo() + " Idade: " + n.getIdade() + " Peso: " + n.getPeso() + " Raça: " + n.getRaca() + " Endereço: " + n.getEndereco());
-
+    public void buscarAnimal(String criterio, String valor1, String valor2, String tipoPet) {
+        boolean encontrado = false;
+        if (criterio == null || valor1 == null || valor2 == null || tipoPet == null || criterio.trim().isEmpty() || valor1.trim().isEmpty() || valor2.trim().isEmpty() || tipoPet.trim().isEmpty()) {
+            System.out.println("Criterio ou valor inválido");
+            return;
         }
-        return "";
+
+        TipoAnimal tipoFiltro;
+        try {
+            tipoFiltro = TipoAnimal.valueOf(tipoPet.trim().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Tipo de pet inválido");
+            return;
+        }
+
+        if (criterio.equalsIgnoreCase("nome e idade")) {
+            for (Animal n : dados) {
+                if (n.getNome().toUpperCase().contains(valor1.toUpperCase()) && Double.toString(n.getIdade()).equals(valor2) && n.getTipo() == tipoFiltro) {
+                    encontrado = true;
+                    System.out.print("Nome: " + "\u001B[1m" + n.getNome() + "\u001B[0m" + " "
+                            + "tipo: "
+                            + n.getTipo() +
+                            "e Idade"
+                            + " "
+                            + n.getIdade() +
+                            " " +
+                            " endereço"+
+                            n.getEndereco()+
+                            " "+
+                            n.getIdade()+
+                            " "+
+                            n.getPeso()+
+                            " "+
+                            n.getRaca()+
+                            " "+
+                            "Encontrado");
+                }
+            }
+        } else if (criterio.equalsIgnoreCase("Idade E peso")) {
+            for (Animal n : dados) {
+                if (Double.toString(n.getIdade()).equals(valor1) && Double.toString(n.getPeso()).equals(valor2) && n.getTipo() == tipoFiltro) {
+                    encontrado = true;
+                    System.out.print("Nome: " + "\u001B[1m" + n.getNome() + "\u001B[0m" + " "
+                            + "tipo: "
+                            + n.getTipo() +
+                            "e Idade"
+                            + " "
+                            + n.getIdade() +
+                            " " +
+                            " endereço"+
+                            n.getEndereco()+
+                            " "+
+                            n.getIdade()+
+                            " "+
+                            n.getPeso()+
+                            " "+
+                            n.getRaca()+
+                            " "+
+                            "Encontrado");
+                }
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Animal Não Encontrado");
+        }
     }
 }
+
