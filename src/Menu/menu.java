@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import Menu.Cadastro;
+
 
 
 
@@ -48,7 +48,7 @@ public class menu {
                 continue;
             }
             switch (escolha) {
-                case "1":
+                case "1": {
                     System.out.println("Opção 1 selecionada: Criar Animal");
                     BufferedReader br = new BufferedReader(new FileReader("formulario.txt"));
                     String linha;
@@ -113,99 +113,60 @@ public class menu {
                         System.out.println("Erro ao criar animal: " + e.getMessage());
                     }
                     break;
+                }
+                case "2": {
+                    boolean idValido = true;
+                    while (idValido) {
+                        String criterio1;
+                        String criterio2;
+                        String valor;
+                        String tipoEscolhido1;
+                        String valor2;
+                        double idBusca;
 
-                case "2":   boolean idValido = true;
-                    while (idValido){
-                    String criterio1;
-                    String criterio2;
-                    String valor;
-                    String tipoEscolhido1;
-                    String valor2;
-                    double idBusca;
+                        System.out.println("Opção 2 selecionada: ");
 
-                    System.out.println("Opção 2 selecionada: ");
+                        System.out.println("QUal tipo de pet deseja buscar?");
+                        tipoEscolhido1 = scanner.nextLine();
 
-                    System.out.println("QUal tipo de pet deseja buscar?");
-                    tipoEscolhido1 = scanner.nextLine();
+                        System.out.println("1- para 1 criterio ou 2- para 2 criterio");
+                        String esc1 = scanner.nextLine();
 
-                    System.out.println("1- para 1 criterio ou 2- para 2 criterio");
-                    String esc1 = scanner.nextLine();
+                        if (esc1.equals("1")) {
 
-                    if (esc1.equals("1")) {
-
-                        System.out.println("Qual criterio deseja listar?" +
-                                "temos nome, sobrenome, sexo, tipo, idade, peso e raca");
-                        criterio1 = scanner.nextLine();
-
-                        if (criterio1.equalsIgnoreCase("nome")) {
-                            System.out.println("Digite o nome do pet que deseja buscar:");
+                            System.out.println("Qual criterio deseja listar?" +
+                                    "temos nome, sobrenome, sexo, tipo, idade, peso e raca");
+                            criterio1 = scanner.nextLine();
+                            System.out.println("Qual valor deseja buscar?");
                             valor = scanner.nextLine();
-                            cadastro.buscarAnimal("nome", valor, tipoEscolhido1);
+                            cadastro.buscarAnimal(criterio1, valor, tipoEscolhido1);
 
 
-                        } else if (criterio1.equalsIgnoreCase("sobrenome")) {
-                            System.out.println("Digite o sobrenome do pet que deseja buscar:");
+                        } else if (esc1.equals("2")) {
+
+                            System.out.println("Qual criterio deseja listar? 1-Nome e / ou sobrenome E IDADE ou 2-Idade E peso");
+                            criterio2 = scanner.nextLine();
+
+                            if (criterio2.equalsIgnoreCase("2")) {
+                                criterio2 = "idade E peso";
+                            } else if (criterio2.equalsIgnoreCase("1")) {
+                                criterio2 = "nome e idade";
+                            }else {
+                                System.out.println("Criterio inválido. Por favor, escolha um criterio válido.");
+                                continue;
+                            }
+
+                            System.out.println("Qual valor deseja buscar para o primeiro criterio?");
                             valor = scanner.nextLine();
-                            cadastro.buscarAnimal("sobrenome", valor, tipoEscolhido1);
+                            System.out.println("Qual valor deseja buscar para o segundo criterio?");
+                            valor2 = scanner.nextLine();
+                            cadastro.buscarAnimal(criterio2, valor, valor2, tipoEscolhido1);
 
-                        } else if (criterio1.equalsIgnoreCase("sexo")) {
-                            System.out.println("Digite o sexo do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("sexo", valor, tipoEscolhido1);
-
-                        } else if (criterio1.equalsIgnoreCase("tipo")) {
-                            System.out.println("Digite o tipo do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("tipo", valor, tipoEscolhido1);
-
-                        } else if (criterio1.equalsIgnoreCase("idade")) {
-                            System.out.println("Digite a idade do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("idade", valor, tipoEscolhido1);
-
-                        } else if (criterio1.equalsIgnoreCase("peso")) {
-                            System.out.println("Digite o peso do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("peso", valor, tipoEscolhido1);
-
-                        } else if (criterio1.equalsIgnoreCase("raca")) {
-                            System.out.println("Digite a raça do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("raca", valor, tipoEscolhido1);
 
                         } else {
                             System.out.println("Criterio inválido. Por favor, escolha um criterio válido.");
+                            continue;
                         }
-                    }
-
-                    if (esc1.equals("2")) {
-                        System.out.println("Qual criterio deseja listar? 1-Nome e / ou sobrenome E IDADE ou 2-Idade E peso");
-                        criterio2 = scanner.nextLine();
-
-
-                        if (criterio2.equalsIgnoreCase("1")) {
-
-                            System.out.println("Digite o nome/sobrenome do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-
-                            System.out.println("Digite a idade do pet que deseja buscar:");
-                            valor2 = scanner.nextLine();
-
-                            cadastro.buscarAnimal("nome e idade", valor, valor2, tipoEscolhido1);
-
-                        } else if (criterio2.equalsIgnoreCase("2")) {
-                            System.out.println("Digite o Idade do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-
-                            System.out.println("Digite o peso do pet que deseja buscar:");
-                            valor2 = scanner.nextLine();
-
-                            cadastro.buscarAnimal("Idade E peso", valor, valor2,tipoEscolhido1);
-                        } else {
-                            System.out.println("Criterio inválido. Por favor, escolha um criterio válido.");
-                        }
-                    }
-
                         System.out.println("Qual id deseja alterar");
                         idBusca = Double.parseDouble(scanner.nextLine());
                         if (idBusca <= 0) {
@@ -214,25 +175,112 @@ public class menu {
                         }
 
 
-                    System.out.println("Qual criterio deseja alterar?" +
-                            "temos nome, sobrenome,  idade, peso e raca");
-                    String campoAlteracao = scanner.nextLine();
+                        System.out.println("Qual criterio deseja alterar?" +
+                                "temos nome, sobrenome,  idade, peso e raca");
+                        String campoAlteracao = scanner.nextLine();
 
-                    if(campoAlteracao.equalsIgnoreCase("sexo") || campoAlteracao.equalsIgnoreCase("tipo")){
-                        System.out.println("Campo de alteração inválido. Por favor, escolha um campo válido para alteração.");
-                        break;
+                        if (campoAlteracao.equalsIgnoreCase("sexo") || campoAlteracao.equalsIgnoreCase("tipo")) {
+                            System.out.println("Campo de alteração inválido. Por favor, escolha um campo válido para alteração.");
+                            continue;
+                        }
+
+
+                        System.out.println("Que valor ira usar para alterar");
+                        String novoValor = scanner.nextLine();
+
+
+                        cadastro.alteraDados(campoAlteracao, novoValor, idBusca);
+                        idValido = false;
                     }
+                    break;
+                }
+                case "3": {
+                    boolean idValido = true;
+                    while (idValido) {
+                        String criterio1;
+                        String criterio2;
+                        String valor;
+                        String tipoEscolhido1;
+                        String valor2;
+                        double idBusca;
+
+                        System.out.println("QUal tipo de pet deseja buscar?");
+                        tipoEscolhido1 = scanner.nextLine();
+
+                        System.out.println("1- para 1 criterio ou 2- para 2 criterio");
+                        String esc1 = scanner.nextLine();
+
+                        if (esc1.equals("1")) {
+
+                            System.out.println("Qual criterio deseja listar?" +
+                                    "temos nome, sobrenome, sexo, tipo, idade, peso e raca");
+                            criterio1 = scanner.nextLine();
+                            System.out.println("Qual valor deseja buscar?");
+                            valor = scanner.nextLine();
+                            cadastro.buscarAnimal(criterio1, valor, tipoEscolhido1);
 
 
-                    System.out.println("Que valor ira usar para alterar");
-                    String novoValor = scanner.nextLine();
+                        } else if (esc1.equals("2")) {
+
+                            System.out.println("Qual criterio deseja listar? 1-Nome e / ou sobrenome E IDADE ou 2-Idade E peso");
+                            criterio2 = scanner.nextLine();
+
+                            if (criterio2.equalsIgnoreCase("2")) {
+                                criterio2 = "idade E peso";
+                            } else if (criterio2.equalsIgnoreCase("1")) {
+                                criterio2 = "nome e idade";
+                            } else {
+                                System.out.println("Criterio inválido. Por favor, escolha um criterio válido.");
+                                continue;
+                            }
+
+                            System.out.println("Qual valor deseja buscar para o primeiro criterio?");
+                            valor = scanner.nextLine();
+                            System.out.println("Qual valor deseja buscar para o segundo criterio?");
+                            valor2 = scanner.nextLine();
+                            cadastro.buscarAnimal(criterio2, valor, valor2, tipoEscolhido1);
 
 
-                    cadastro.alteraDados(campoAlteracao, novoValor, idBusca);
-                    idValido = false;
+                        } else {
+                            System.out.println("Criterio inválido. Por favor, escolha um criterio válido.");
+                            continue;
+                        }
 
+                        System.out.println("Qual id deseja deletar");
+                        idBusca = Double.parseDouble(scanner.nextLine());
+
+                        if (idBusca <= 0) {
+                            System.out.println("ID inválido. Por favor, insira um ID válido.");
+                            continue;
+                        }
+
+
+                        System.out.println("deseja deletar o pet: "+ idBusca+"? 1- Sim ou 2- Não");
+                        String escolhaDeletar = scanner.nextLine();
+                        if (escolhaDeletar.equals("1")) {
+                        cadastro.deletarAnimal(idBusca);
+                            idValido = false;
+                    } else if (escolhaDeletar.equals("2")) {
+                        System.out.println("Operação de exclusão cancelada. O pet não será deletado");
+                        }
+                        idValido = false;
+                    }
+                        break;
                 }
                 case "4": {
+                    List <Animal> lista = Cadastro.getAll();
+                    for (Animal n : lista){
+                        System.out.println(n.getNome() +
+                                " " + n.getSobrenome()
+                                + " " + n.getSexo() + " "
+                                + n.getIdade() + " "
+                                + n.getPeso() + " "
+                                + n.getRaca() + " "
+                                + n.getEndereco());
+                    }
+                    break;
+                }
+                case "5": {
 
                     String criterio;
                     String criterio2;
@@ -246,75 +294,53 @@ public class menu {
                     System.out.println("1- para 1 criterio ou 2- para 2 criterio");
                     esc1 = scanner.nextLine();
                     if (esc1.equals("1")) {
-                        System.out.println("Qual criterio deseja listar?");
+
+                        System.out.println("Qual criterio deseja listar?" +
+                                "temos nome, sobrenome, sexo, tipo, idade, peso e raca");
                         criterio = scanner.nextLine();
+                        System.out.println("Qual valor deseja buscar?");
+                        valor = scanner.nextLine();
+                        cadastro.buscarAnimal(criterio, valor, tipoEscolhido);
 
-                        if (criterio.equalsIgnoreCase("nome")) {
-                            System.out.println("Digite o nome do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("nome", valor, tipoEscolhido);
 
-                        } else if (criterio.equalsIgnoreCase("sobrenome")) {
-                            System.out.println("Digite o sobrenome do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("sobrenome", valor, tipoEscolhido);
+                    }  else if (esc1.equals("2")) {
 
-                        } else if (criterio.equalsIgnoreCase("sexo")) {
-                            System.out.println("Digite o sexo do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("sexo", valor, tipoEscolhido);
+                        System.out.println("Qual criterio deseja listar? 1-Nome e / ou sobrenome E IDADE ou 2-Idade E peso");
+                        criterio2 = scanner.nextLine();
 
-                        } else if (criterio.equalsIgnoreCase("tipo")) {
-                            System.out.println("Digite o tipo do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("tipo", valor, tipoEscolhido);
-
-                        } else if (criterio.equalsIgnoreCase("idade")) {
-                            System.out.println("Digite a idade do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("idade", valor, tipoEscolhido);
-
-                        } else if (criterio.equalsIgnoreCase("peso")) {
-                            System.out.println("Digite o peso do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("peso", valor, tipoEscolhido);
-
-                        } else if (criterio.equalsIgnoreCase("raca")) {
-                            System.out.println("Digite a raça do pet que deseja buscar:");
-                            valor = scanner.nextLine();
-                            cadastro.buscarAnimal("raca", valor, tipoEscolhido);
-
+                        if (criterio2.equalsIgnoreCase("2")){
+                            criterio2 = "idade E peso";
+                        } else if (criterio2.equalsIgnoreCase("1")) {
+                            criterio2 = "nome e idade";
                         } else {
                             System.out.println("Criterio inválido. Por favor, escolha um criterio válido.");
+                            continue;
                         }
+
+                        System.out.println("Qual valor deseja buscar para o primeiro criterio?");
+                        valor = scanner.nextLine();
+
+                        System.out.println("Qual valor deseja buscar para o segundo criterio?");
+                        valor2 = scanner.nextLine();
+
+                        cadastro.buscarAnimal(criterio2, valor, valor2, tipoEscolhido);
+
+
+                    } else {
+                        System.out.println("Criterio inválido. Por favor, escolha um criterio válido.");
+                        continue;
                     }
-                        if (esc1.equals("2")) {
-                            System.out.println("Qual criterio deseja listar? Nome e / ou sobrenome E IDADE ou Idade E peso");
-                            criterio2 = scanner.nextLine();
-                            if (criterio2.equalsIgnoreCase("Nome e / ou sobrenome E IDADE")) {
-
-                                System.out.println("Digite o nome/sobrenome do pet que deseja buscar:");
-                                valor = scanner.nextLine();
-                                System.out.println("Digite a idade do pet que deseja buscar:");
-                                valor2 = scanner.nextLine();
-                                cadastro.buscarAnimal("nome e idade", valor, valor2);
-
-                            } else if (criterio2.equalsIgnoreCase("Idade E peso")) {
-
-                                System.out.println("Digite o Idade do pet que deseja buscar:");
-                                valor = scanner.nextLine();
-
-                                System.out.println("Digite o peso do pet que deseja buscar:");
-                                valor2 = scanner.nextLine();
-                                cadastro.buscarAnimal("Idade E peso", valor, valor2);
-                            }
-                            else {
-                                System.out.println("Criterio inválido. Por favor, escolha um criterio válido.");
-                            }
-
-                        }
-                    }
-
+                break;
+                }
+                case "6" : {
+                    sistemaRodando = false;
+                    System.out.println("Saindo do programa. Até mais!");
+                    break;
+                }
+                 default: {
+                     System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
+                     break;
+                 }
                 }
             }
         }

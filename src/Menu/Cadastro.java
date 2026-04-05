@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class Cadastro {
-    protected static ArrayList<Animal> dados = new ArrayList<>();
+    protected static List<Animal> dados = new ArrayList<>();
     Path diretorio = Paths.get("C:\\Users\\Humberto Figueiredo\\IdeaProjects\\SistemaDeCadastro\\src\\Menu\\petsCadastrados");
 
     public void criarAnimal(Animal animal) throws ExececaoErrorCriacao, IOException {
@@ -61,8 +61,8 @@ public class Cadastro {
         }
     }
 
-    public void deletarAnimal(String nome) {
-        boolean encontrado = dados.removeIf(n -> n.getNome().equalsIgnoreCase(nome));
+    public void deletarAnimal(double id) {
+        boolean encontrado = dados.removeIf(n -> n.getId() == id);
 
         if (!encontrado) {
             System.out.println("Pet não encontrado");
@@ -173,7 +173,7 @@ public class Cadastro {
             for (Animal n : dados) {
                 if (n.getSobrenome().toUpperCase().contains(valor.toUpperCase()) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
-                    System.out.print("Animal" + " " + n.getSobrenome() + " " + "Encontrado");
+                    System.out.print("Id: " + n.getId() +" "+"Animal" + " " + n.getSobrenome() + " " + "Encontrado");
 
                 }
 
@@ -182,7 +182,7 @@ public class Cadastro {
             for (Animal n : dados) {
                 if (n.getRaca().equals(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
-                    System.out.print("Animal" + " " + n.getRaca() + " " + "Encontrado");
+                    System.out.print("Id: " + n.getId() +" "+"Animal" + " " + n.getRaca() + " " + "Encontrado");
 
                 }
 
@@ -191,7 +191,7 @@ public class Cadastro {
             for (Animal n : dados) {
                 if (n.getTipo().toString().equalsIgnoreCase(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
-                    System.out.print("Animal" + " " + n.getTipo() + " " + "Encontrado");
+                    System.out.print("Id: " + n.getId() +" "+"Animal" + " " + n.getTipo() + " " + "Encontrado");
 
                 }
 
@@ -200,7 +200,7 @@ public class Cadastro {
             for (Animal n : dados) {
                 if (n.getSexo().toString().equalsIgnoreCase(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
-                    System.out.print("Animal" + " " + n.getSexo() + " " + "Encontrado");
+                    System.out.print("Id: " + n.getId() +" "+"Animal" + " " + n.getSexo() + " " + "Encontrado");
 
                 }
 
@@ -210,7 +210,7 @@ public class Cadastro {
             for (Animal n : dados) {
                 if (Double.toString(n.getIdade()).equals(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
-                    System.out.print("Animal" + " " + n.getIdade() + " " + "Encontrado");
+                    System.out.print("Id: " + n.getId() +" "+"Animal" + " " + n.getIdade() + " " + "Encontrado");
 
                 }
 
@@ -219,7 +219,7 @@ public class Cadastro {
             for (Animal n : dados) {
                 if (Double.toString(n.getPeso()).equals(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
-                    System.out.print("Animal" + " " + n.getPeso() + " " + "Encontrado");
+                    System.out.print("Id: " + n.getId() +" "+"Animal" + " " + n.getPeso() + " " + "Encontrado");
 
                 }
 
@@ -228,7 +228,7 @@ public class Cadastro {
             for (Animal n : dados) {
                 if (n.getEndereco().equalsIgnoreCase(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
-                    System.out.print("Animal" + " " + n.getEndereco() + " " + "Encontrado");
+                    System.out.print("Id: " + n.getId() +" "+"Animal" + " " + n.getEndereco() + " " + "Encontrado");
 
                 }
 
@@ -238,7 +238,7 @@ public class Cadastro {
             for (Animal n : dados) {
                 if (Double.toString(n.getId()).equals(valor) && n.getTipo() == tipoFiltro) {
                     encontrado = true;
-                    System.out.print("Animal" + " " + n.getId() + " " + "Encontrado");
+                    System.out.print("Id: " + n.getId() +" "+"Animal" + " " + n.getId() + " " + "Encontrado");
 
                 }
 
@@ -319,8 +319,8 @@ public class Cadastro {
         }
     }
 
-    public static ArrayList<Animal> getDados() {
-        return dados;
+    public  static List<Animal> getAll() {
+        return java.util.Collections.unmodifiableList(dados);
     }
 }
 
