@@ -83,4 +83,40 @@ public class Animal {
         return sexo;
 
     }
+
+    public void setId(double id) {
+        this.id = id;
+    }
+
+    public void setTipo(TipoAnimal tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public void setSexo(SexoAnimal sexo) {
+        this.sexo = sexo;
+    }
+
+    public void setIdade(double idade) {
+        this.idade = idade;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public void setRaca(String raca) {
+        this.raca = raca;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 }
